@@ -1,0 +1,43 @@
+name: ForexFactory alerts
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ff-alerts
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests
+
+      - name: Run bot
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TZ_NAME: ${{ vars.TZ_NAME || 'UTC' }}
+          ALERT_MINUTES: ${{ vars.ALERT_MINUTES || '15' }}
+          SUMMARY_HOUR: ${{ vars.SUMMARY_HOUR || '7' }}
+          CURRENCIES: ${{ vars.CURRENCIES || '' }}
+          KEYWORDS: ${{ vars.KEYWORDS || '' }}
+          FEEDS: ${{ vars.FEEDS || '' }}
+        run: python bot.py
+
+      - name: Save state
+        run: |
+          git config user.name "ff-bot"
+          git config user.email "ff-bot@users.noreply.github.com"
+          git add sent.json
+          git diff --cached --quiet || (git commit -m "update sent state" && git push)
