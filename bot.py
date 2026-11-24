@@ -11,6 +11,7 @@ Guarda en sent.json lo ya enviado para no duplicar avisos.
 import json
 import os
 import re
+import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -206,12 +207,28 @@ def run_news(state, now):
     state["news_seeded"] = True
 
 
+RUN_SECONDS = int(os.environ.get("RUN_SECONDS") or 0)          # 0 = una sola pasada
+CHECK_SECONDS = int(os.environ.get("CHECK_SECONDS") or 30)
+CALENDAR_EVERY = 300  # el feed del calendario limita peticiones: máximo cada 5 min
+
+
 def main():
     state = load_state()
-    now = datetime.now(timezone.utc)
-    run_calendar(state, now)
-    run_news(state, now)
-    save_state(state)
+    start = time.time()
+    last_calendar = 0.0
+    while True:
+        now = datetime.now(timezone.utc)
+        try:
+            if time.time() - last_calendar >= CALENDAR_EVERY:
+                run_calendar(state, now)
+                last_calendar = time.time()
+            run_news(state, now)
+        except Exception as ex:
+            print(f"Error: {ex}")
+        save_state(state)
+        if time.time() - start + CHECK_SECONDS >= RUN_SECONDS:
+            break
+        time.sleep(CHECK_SECONDS)
 
 
 if __name__ == "__main__":
