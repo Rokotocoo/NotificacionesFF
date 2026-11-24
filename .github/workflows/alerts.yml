@@ -2,7 +2,7 @@ name: ForexFactory alerts
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,6 +15,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -33,9 +34,12 @@ jobs:
           CURRENCIES: ${{ vars.CURRENCIES || '' }}
           KEYWORDS: ${{ vars.KEYWORDS || '' }}
           FEEDS: ${{ vars.FEEDS || '' }}
+          RUN_SECONDS: "3000"
+          CHECK_SECONDS: ${{ vars.CHECK_SECONDS || '30' }}
         run: python bot.py
 
       - name: Save state
+        if: always()
         run: |
           git config user.name "ff-bot"
           git config user.email "ff-bot@users.noreply.github.com"
