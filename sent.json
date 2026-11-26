@@ -1,6 +1,7 @@
 {
   "alerts": {
-    "2026-11-24T12:25:00-05:00|CAD|BOC Gov Macklem Speaks": "2026-11-24T17:11:59.112806+00:00"
+    "2026-11-24T12:25:00-05:00|CAD|BOC Gov Macklem Speaks": "2026-11-24T17:11:59.112806+00:00",
+    "2026-11-26T18:30:00-05:00|JPY|Tokyo Core CPI y/y": "2026-11-26T23:19:45.332422+00:00"
   },
   "summaries": [
     "2026-11-24",
@@ -780,7 +781,17 @@
     "FinancialJuice|9869810": "2026-11-26T22:11:54.770678+00:00",
     "FinancialJuice|9869809": "2026-11-26T22:11:54.770678+00:00",
     "FinancialJuice|9869811": "2026-11-26T22:15:56.025716+00:00",
-    "FinancialJuice|9869813": "2026-11-26T22:16:26.272789+00:00"
+    "FinancialJuice|9869813": "2026-11-26T22:16:26.272789+00:00",
+    "InvestingLive|https://investinglive.com/central-banks/ecb-picks-spain-s-hernandez-de-cos-as-president-with-3-tests-waiting-from-day-one/": "2026-11-26T23:09:41.170366+00:00",
+    "InvestingLive|https://investinglive.com/cryptocurrency/jpmorgan-sees-bitcoin-capitulation-in-record-strategy-discount-but-3-risks-cloud-the-call/": "2026-11-26T23:09:41.170366+00:00",
+    "FinancialJuice|9869830": "2026-11-26T23:30:19.436360+00:00",
+    "FinancialJuice|9869829": "2026-11-26T23:30:19.436360+00:00",
+    "FinancialJuice|9869847": "2026-11-26T23:51:58.175266+00:00",
+    "FinancialJuice|9869846": "2026-11-26T23:51:58.175266+00:00",
+    "FinancialJuice|9869845": "2026-11-26T23:51:58.175266+00:00",
+    "FinancialJuice|9869844": "2026-11-26T23:51:58.175266+00:00",
+    "FinancialJuice|9869848": "2026-11-26T23:55:59.719480+00:00",
+    "FinancialJuice|9869849": "2026-11-26T23:58:00.665421+00:00"
   },
   "news_seeded": true
 }
